@@ -48,7 +48,17 @@ function log(text) {
 
 function countNeighbours(arr) {}
 
-function liveOrDie(arr) {}
+function liveOrDie(arr) {
+    // Should read through the grid and calculate if a cell:
+    // lives = 2-3 neighbours
+    // dies = less than 2 neighbours || 4 or more neighbours
+    // new cell = 3 neighbours && cell value === 0 --> cell value = 1
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+        
+    }
+  }
+}
 
 function clear() {}
 
