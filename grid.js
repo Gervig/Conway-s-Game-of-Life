@@ -15,11 +15,29 @@ export default class Grid {
     return this.arr[row][col];
   }
 
+  
+  // flatten 2D array, så fx:
+  //   Row  	Col	  Index
+  //   0	    0	      0
+  //   0	    1	      1
+  //   0	    2	      2
+  //   1	    0	      3
+  //   1	    1	      4
+  //   1	    2	      5
+
+  // kan bruges til indexFor() & rowColFor()
+
   // returnerer index (nummeret) på cellen i denne række+kolonne
-  indexFor({ row, col }) {}
+  indexFor({ row, col }) {
+    return row * this.cols + col;
+  }
 
   // returnerer et {row, col} objekt for cellen med dette index (nummer)
-  rowColFor(index) {}
+  rowColFor(index) {
+    const row = Math.floor(index / this.cols);
+    const col = index % this.cols;
+    return { row, col };
+  }
 
   // returnerer en liste over alle naboceller til denne (i form af {row, col} objekter
   neighbours({ row, col }) {
@@ -68,7 +86,6 @@ export default class Grid {
   }
 
   clear() {
-    //TODO: couldn't we just make a new grid?
     this.arr = Array.from({ length: this.rows }, () =>
       Array.from({ length: this.cols }, () => 0)
     );
