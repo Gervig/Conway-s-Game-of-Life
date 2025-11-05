@@ -1,0 +1,28 @@
+body {
+  background-color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: chartreuse;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell-size));
+  grid-template-rows: repeat(var(--rows), var(--cell-size));
+  margin: 0 auto;
+}
+
+.cell {
+  width: var(--cell-size);
+  aspect-ratio: 1 / 1;
+  border: 1px solid #888;
+  background-color: white;
+}
+

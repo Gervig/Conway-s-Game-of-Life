@@ -1,0 +1,11 @@
+Reglerne for Game of Life er:
+
+- Hver eneste celle i grid’et kan enten være levende eller død
+- Når “spillet” starter, er det med et tilfældigt grid hvor nogle celler er levende.
+- For hver generation besluttes det om hver eneste celle skal leve eller dø, ud fra antallet af naboer:
+    - < 2 naboer - cellen dør af ensomhed
+    - 2 naboer - cellen lever videre, hvis den altså var levende
+    - 3 naboer - en ny celle bliver født, eller lever videre, hvis der var en
+    - > 3 naboer - cellen død af overbefolkning
+    
+    Beslutningerne træder først i kraft for næste generation - og i samme øjeblik for samtlige celler. Der er altså ikke noget med at en nyfødt celle kan påvirke sine naboer før næste generation.
