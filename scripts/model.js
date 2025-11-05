@@ -29,6 +29,8 @@ const startCells = balancedStart; // variable for start number of living cells
 let gameGrid = new Grid(rows, cols);
 // the grid we use for calculating
 let calculateGrid = new Grid(rows, cols);
+// empty grid for clearing grids
+let emptyGrid = new Grid(rows, cols);
 
 export function writeToCell(row, col, value) {
   gameGrid.set({ row: row, col: col }, value);
@@ -54,7 +56,7 @@ function liveOrDie(arr) {
   // the border of the grid is not considered a living cell
 
   // to start with we clear the calculating grid
-  clear(calculateGrid);
+  calculateGrid.clear();
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
@@ -73,16 +75,7 @@ function countNeighbours(arr) {
   let count = 0;
 }
 
-// should take a grid as an argument
-// and set all the values to 0
-function clear(arr) {
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      arr.set({ row: i, col: j }, 0);
-    }
-  }
-}
-
+// adds num amount of new living cells to the gameGrid
 function addRandomCells(num) {}
 
 export function getNumOfCols() {
