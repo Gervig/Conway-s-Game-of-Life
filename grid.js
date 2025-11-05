@@ -4,4 +4,12 @@ export default class Grid {
       Array.from({ length: cols }, () => 0)
     );
   }
+
+  set({ row, col }, value) {
+    this.arr[row][col] = value;
+  }
+
+  get({ row, col }) {
+    return this.arr[row][col];
+  }
 }

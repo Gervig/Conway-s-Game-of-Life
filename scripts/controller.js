@@ -13,7 +13,6 @@ function startController() {
 
   const grid = document.getElementById("grid");
 
-
   log(`Rows: ${numOfRows}, Col: ${numOfCol}`);
 
   for (let row = 0; row < numOfRows; row++) {
@@ -26,11 +25,13 @@ function startController() {
       grid.appendChild(cell);
     }
   }
+
+  model.startGame();
 }
 
 export function setCell(row, col, value) {
   model.writeToCell(row, col, value);
-//   model.dump();
+    // model.dump();
 }
 
 startController();
