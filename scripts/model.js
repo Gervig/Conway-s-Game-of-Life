@@ -1,6 +1,8 @@
+import Grid from "../grid.js"
+
 //TODO: make these changeable before game starts
-let cols = 48;  // number of columns
 let rows = 27; // number of rows
+let cols = 48;  // number of columns
 
 const cellSize = 15; // px
 
@@ -11,31 +13,31 @@ grid.style.setProperty("--cell-size", `${cellSize}px`);
 
 const totalCells = cols*rows;
 
-const balancedStart = (totalCells / 20); // 20% of total cells
-const activeStart = (totalCells / 25); // 25 of total cells
+const balancedStart = Math.floor(totalCells / 20); // 20% of total cells
+// if you want more living cells in the start
+const activeStart = Math.floor(totalCells / 25); // 25 of total cells
 
-const iterations = 0; // counts iterations
+let gameStarted = false;
 
-const speed = 0.5; // in seconds
+let iterations = 0; // counts iterations
+
+let speed = 0.5; // in seconds
 
 const startCells = balancedStart; // variable for start number of living cells
 
 //TODO: use GRID?
-const arr = Array.from({ length: rows }, () => 
-  Array.from({ length: cols }, () => 0)
-);
+let gameGrid = new Grid(rows, cols);
 
 export function writeToCell(row, col, value) {
-  arr[row][col] = value;
-  log(`Skrev ${value} til række ${row}, kolonne ${col}.`);
+  gameGrid[row][col] = value;
 }
 
 export function readFromCell(row, col) {
-  return arr[row][col];
+  return gameGrid[row][col];
 }
 
 export function dump() {
-  console.table(arr);
+  console.table(gameGrid);
 }
 
 function log(text) {
@@ -60,4 +62,15 @@ export function getNumofRows(){
     return rows;
 }
 
+function smallerGrid(){
+    //TODO: decrease cols and rows, keep dimensions the same
+}
+
+function largerGrid(){
+    //TODO: increase cols and rows, keep dimensions the same
+}
+
+function startGame(){
+
+}
 

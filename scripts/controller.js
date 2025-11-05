@@ -30,7 +30,7 @@ function startController() {
 
 export function setCell(row, col, value) {
   model.writeToCell(row, col, value);
-  model.dump();
+//   model.dump();
 }
 
 startController();

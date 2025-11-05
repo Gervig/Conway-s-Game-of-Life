@@ -7,6 +7,8 @@ export function registerEventHandlers() {
   // så når der bliver trykket en .cell
   // kaldes clickedCell()
   document.querySelector("#grid").addEventListener("click", clickedCell);
+  //TODO: handle button clicks
+  document.querySelector('#buttons').addEventListener("click", clickedButton);
 }
 
 function clickedCell(event) {
@@ -17,6 +19,11 @@ function clickedCell(event) {
     log(`Der blev klikket på row: ${row} col: ${col}`);
     controller.setCell(row, col, 1);
   }
+}
+
+//TODO: handle button clicks
+function clickedButton(event){
+    const button = event.target;
 }
 
 function log(text) {
