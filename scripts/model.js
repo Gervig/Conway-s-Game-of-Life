@@ -46,21 +46,42 @@ function log(text) {
   console.log(text);
 }
 
-function countNeighbours(arr) {}
-
 function liveOrDie(arr) {
-    // Should read through the grid and calculate if a cell:
-    // lives = 2-3 neighbours
-    // dies = less than 2 neighbours || 4 or more neighbours
-    // new cell = 3 neighbours && cell value === 0 --> cell value = 1
+  // Should read through the grid and calculate if a cell:
+  // lives = 2-3 neighbours
+  // dies = less than 2 neighbours || 4 or more neighbours
+  // new cell = 3 neighbours && cell value === 0 --> cell value = 1
+  // the border of the grid is not considered a living cell
+
+  // to start with we clear the calculating grid
+  clear(calculateGrid);
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-        
+      cell = arr.get({ row: i, col: j });
+      neighbours = new Grid(3, 3);
+
+      //TODO: set neighbours grid for all directions around the cell
+      neighbours.set(arr.get({ row: i - 1, col: j - 1 }));
+      neighbours.set(arr.get({ row: i, col: j - 1 }));
     }
   }
 }
 
-function clear() {}
+// method for counting neighbours
+function countNeighbours(arr) {
+  let count = 0;
+}
+
+// should take a grid as an argument
+// and set all the values to 0
+function clear(arr) {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      arr.set({ row: i, col: j }, 0);
+    }
+  }
+}
 
 function addRandomCells(num) {}
 
