@@ -15,7 +15,6 @@ export default class Grid {
     return this.arr[row][col];
   }
 
-  
   // flatten 2D array, så fx:
   //   Row  	Col	  Index
   //   0	    0	      0
@@ -41,28 +40,57 @@ export default class Grid {
 
   // returnerer en liste over alle naboceller til denne (i form af {row, col} objekter
   neighbours({ row, col }) {
-    let neighbours = [];
+    const n = this.north({ row, col });
+    const s = this.south({ row, col });
+    const w = this.west({ row, col });
+    const e = this.east({ row, col });
 
-    return neighbours;
+    const nw = this.west(n);
+    const ne = this.east(n);
+    const sw = this.west(s);
+    const se = this.east(s);
+
+    return [nw, n, ne, w, e, sw, s, se];
   }
 
   // returnerer en liste over alle nabocellers values.
   // Når der skal returneres en celle, er det i form at et objekt med `{row, col, value}`
   neighboursValues({ row, col }) {
-    let neighboursValues = [];
+    const neighbours = this.neighbours({ row, col });
 
-    return neighboursValues;
+    const values = [];
+    for (let n of neighbours) {
+      if (n) {
+        // skip out-of-bounds
+        values.push(this.arr[n.row][n.col]);
+      }
+    }
+    return values;
   }
 
   // retunere cellen i en retning, undefined hvis der ikke er nogen
-  north({ row, col }) {}
+  north({ row, col }) {
+    if (row - 1 < 0) return undefined;
+    return { row: row - 1, col };
+  }
 
-  south({ row, col }) {}
+  south({ row, col }) {
+    if (row + 1 >= this.rows) return undefined;
+    return { row: row + 1, col };
+  }
 
-  west({ row, col }) {}
+  west({ row, col }) {
+    if (col - 1 < 0) return undefined;
+    return { row, col: col - 1 };
+  }
 
-  east({ row, col }) {}
+  east({ row, col }) {
+    if (col + 1 >= this.cols) return undefined;
+    return { row, col: col + 1 };
+  }
 
+  // har vi virkelig brug for dem her? grid.rows er det samme some grid.rows()? 
+  // Samme med cols, virker bare forvirrende
   rows() {
     return this.rows;
   }
@@ -73,13 +101,13 @@ export default class Grid {
 
   // returnerer det samlede antal celler
   size() {
-    return this.rows() * this.cols();
+    return this.rows * this.cols;
   }
 
   // skriver den angivne value ind i alle celler
   fill(value) {
-    for (let i = 0; i < this.arr[rows].length() - 1; i++) {
-      for (let j = 0; j < this.arr[cols].length() - 1; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
         this.arr[i][j] = value;
       }
     }
