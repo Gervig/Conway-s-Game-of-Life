@@ -17,7 +17,6 @@ function clickedCell(event) {
     const row = cell.dataset.row;
     const col = cell.dataset.col;
     log(`Der blev klikket på row: ${row} col: ${col}`);
-    controller.setCell(row, col, 1);
   }
 }
 
