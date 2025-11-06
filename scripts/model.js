@@ -1,15 +1,29 @@
 import Grid from "../grid.js";
 
 //TODO: make these changeable before game starts
-let rows = 27; // number of rows
-let cols = 48; // number of columns
+let rows, cols, cellSize;
 
-const cellSize = 15; // px
+// Example breakpoints
+if (window.innerWidth <= 480) { // mobile
+  cols = 20;
+  rows = 36;
+  cellSize = '12px';
+} else if (window.innerWidth <= 768) { // tablet
+  cols = 32;
+  rows = 48;
+  cellSize = '16px';
+} else { // desktop
+  cols = 48;
+  rows = 27;
+  cellSize = '20px';
+}
 
 // sets the variables in the style.css
-grid.style.setProperty("--cols", cols);
-grid.style.setProperty("--rows", rows);
-grid.style.setProperty("--cell-size", `${cellSize}px`);
+const gridElement = document.getElementById('grid');
+
+gridElement.style.setProperty('--rows', rows);
+gridElement.style.setProperty('--cols', cols);
+gridElement.style.setProperty('--cell-size', cellSize);
 
 const totalCells = cols * rows;
 
@@ -29,11 +43,24 @@ let accumulator = 0;
 
 const startCells = balancedStart; // variable for start number of living cells
 
-document.getElementById("start").addEventListener("click", () => {
-  gameRunning = !gameRunning; // toggle
-  if (gameRunning) {
-    lastTime = 0; // reset time tracking
+const startButton = document.getElementById("start");
+
+startButton.addEventListener("click", () => {
+  if (!gameRunning) {
+    // Start or resume the game
+    gameRunning = true;
+    startButton.textContent = "Pause";
+
+    // If starting for the first time, initialize the grid
+    if (iterations === 0) {
+      startGame(); // sets up initial live cells
+    }
+
     requestAnimationFrame(gameLoop);
+  } else {
+    // Pause the game
+    gameRunning = false;
+    startButton.textContent = "Play";
   }
 });
 
@@ -69,6 +96,36 @@ export function readFromCell(row, col) {
 //TODO: this is actually not useful here?
 export function dump() {
   console.table(gameGrid);
+}
+
+// handles grid setup based on screen size
+function setupGridDimensions() {
+  const gridElement = document.getElementById('grid');
+
+  let rows, cols;
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  if (width <= 480) { // mobile
+    cols = 24; // choose number of columns you want
+  } else if (width <= 768) { // tablet
+    cols = 36;
+  } else { // desktop
+    cols = 48;
+  }
+
+  // Calculate cell size to fit the full viewport
+  const cellSizeWidth = Math.floor(width / cols);
+  rows = Math.floor(height / cellSizeWidth);
+  const cellSize = `${cellSizeWidth}px`;
+
+  // Set CSS variables
+  gridElement.style.setProperty('--rows', rows);
+  gridElement.style.setProperty('--cols', cols);
+  gridElement.style.setProperty('--cell-size', cellSize);
+
+  return { rows, cols, cellSize };
 }
 
 function log(text) {
