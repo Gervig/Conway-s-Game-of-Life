@@ -8,10 +8,6 @@ body {
   align-items: center;
 }
 
-h1 {
-  color: chartreuse;
-}
-
 #grid {
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--cell-size));
@@ -24,5 +20,40 @@ h1 {
   aspect-ratio: 1 / 1;
   border: 1px solid #888;
   background-color: white;
+}
+
+/* Import a retro pixel font (optional) */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+h1 {
+  color: chartreuse;
+}
+
+#buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+#buttons button {
+  font-size: 10px;
+  padding: 8px 16px;
+  color: #00ff00; 
+  background-color: #000;
+  border: 2px solid #00ff00;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
+
+#buttons button:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+#buttons button:active {
+  transform: translateY(1px);
 }
 
