@@ -17,7 +17,7 @@ const balancedStart = Math.floor(totalCells / 20); // 20% of total cells
 // if you want more living cells in the start
 const activeStart = Math.floor(totalCells / 25); // 25 of total cells
 
-let gameStarted = false;
+let gameRunning = false;
 
 let iterations = 0; // counts iterations
 
@@ -29,8 +29,6 @@ const startCells = balancedStart; // variable for start number of living cells
 let gameGrid = new Grid(rows, cols);
 // the grid we use for calculating
 let calculateGrid = new Grid(rows, cols);
-// empty grid for clearing grids
-let emptyGrid = new Grid(rows, cols);
 
 export function writeToCell(row, col, value) {
   gameGrid.set({ row: row, col: col }, value);
@@ -48,7 +46,7 @@ function log(text) {
   console.log(text);
 }
 
-function liveOrDie(arr) {
+function liveOrDie(grid) {
   // Should read through the grid and calculate if a cell:
   // lives = 2-3 neighbours
   // dies = less than 2 neighbours || 4 or more neighbours
@@ -60,19 +58,19 @@ function liveOrDie(arr) {
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      cell = arr.get({ row: i, col: j });
+      cell = grid.get({ row: i, col: j });
       neighbours = new Grid(3, 3);
 
       //TODO: set neighbours grid for all directions around the cell
-      neighbours.set(arr.get({ row: i - 1, col: j - 1 }));
-      neighbours.set(arr.get({ row: i, col: j - 1 }));
+      neighbours.set(grid.get({ row: i - 1, col: j - 1 }));
+      neighbours.set(grid.get({ row: i, col: j - 1 }));
     }
   }
 }
 
 // method for counting neighbours
-function countNeighbours(arr) {
-  let count = 0;
+function countNeighbours(grid) {
+  return grid.
 }
 
 // adds num amount of new living cells to the gameGrid
@@ -107,13 +105,26 @@ export function startGame() {
   renderGameGrid(gameGrid);
 
   log("Game started!");
+
+  requestAnimationFrame(loop);
+}
+
+// --- GAME LOOP --- //
+
+let last = 0;
+
+function loop() {
+  gameRunning = true;
+  const now = Date.now();
+  const deltaTime = (now - (last || now)) / 1000;
+  last = now;
 }
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function renderGameGrid(arr) {
+function renderGameGrid(grid) {
   // should read grid, if value is 1 then the cell should be black
   // if the value is 0 the cell should be white
   for (let i = 0; i < rows; i++) {
@@ -121,7 +132,7 @@ function renderGameGrid(arr) {
       const cell = document.querySelector(
         `.cell[data-row="${i}"][data-col="${j}"]`
       );
-      if (arr.get({ row: i, col: j }) === 1) {
+      if (grid.get({ row: i, col: j }) === 1) {
         cell.style.backgroundColor = "black";
       } else {
         cell.style.backgroundColor = "white";
