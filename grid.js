@@ -89,7 +89,7 @@ export default class Grid {
     return { row, col: col + 1 };
   }
 
-  // har vi virkelig brug for dem her? grid.rows er det samme some grid.rows()? 
+  // har vi virkelig brug for dem her? grid.rows er det samme some grid.rows()?
   // Samme med cols, virker bare forvirrende
   rows() {
     return this.rows;
@@ -117,5 +117,11 @@ export default class Grid {
     this.arr = Array.from({ length: this.rows }, () =>
       Array.from({ length: this.cols }, () => 0)
     );
+  }
+
+  clone() {
+    const newGrid = new Grid(this.rows, this.cols);
+    newGrid.arr = this.arr.map((row) => [...row]);
+    return newGrid;
   }
 }
