@@ -93,41 +93,6 @@ export function readFromCell(row, col) {
   return gameGrid.get({ row: row, col: col });
 }
 
-//TODO: this is actually not useful here?
-export function dump() {
-  console.table(gameGrid);
-}
-
-// handles grid setup based on screen size
-function setupGridDimensions() {
-  const gridElement = document.getElementById('grid');
-
-  let rows, cols;
-
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  if (width <= 480) { // mobile
-    cols = 24; // choose number of columns you want
-  } else if (width <= 768) { // tablet
-    cols = 36;
-  } else { // desktop
-    cols = 48;
-  }
-
-  // Calculate cell size to fit the full viewport
-  const cellSizeWidth = Math.floor(width / cols);
-  rows = Math.floor(height / cellSizeWidth);
-  const cellSize = `${cellSizeWidth}px`;
-
-  // Set CSS variables
-  gridElement.style.setProperty('--rows', rows);
-  gridElement.style.setProperty('--cols', cols);
-  gridElement.style.setProperty('--cell-size', cellSize);
-
-  return { rows, cols, cellSize };
-}
-
 function log(text) {
   console.log(text);
 }
