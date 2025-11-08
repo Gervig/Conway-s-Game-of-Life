@@ -21,7 +21,7 @@ function startController() {
       cell.classList.add("cell");
       cell.dataset.row = row;
       cell.dataset.col = col;
-      cell.textContent = ""; // optional, can put "X" for alive
+      cell.textContent = "";
       grid.appendChild(cell);
     }
   }
