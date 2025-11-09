@@ -72,13 +72,13 @@ document.getElementById("faster").addEventListener("click", () => {
   speed = Math.max(0.05, speed - 0.1); // faster, minimum 0.05s
 });
 
-document.getElementById("smaller").addEventListener("click", () => {
-  // optionally shrink grid or reduce cell size
-});
+// document.getElementById("smaller").addEventListener("click", () => {
+//   // optionally shrink grid or reduce cell size
+// });
 
-document.getElementById("larger").addEventListener("click", () => {
-  // optionally enlarge grid or increase cell size
-});
+// document.getElementById("larger").addEventListener("click", () => {
+//   // optionally enlarge grid or increase cell size
+// });
 
 // the grid we show
 let gameGrid = new Grid(rows, cols);
