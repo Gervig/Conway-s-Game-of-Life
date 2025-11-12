@@ -4,26 +4,29 @@ import Grid from "../grid.js";
 let rows, cols, cellSize;
 
 // Example breakpoints
-if (window.innerWidth <= 480) { // mobile
+if (window.innerWidth <= 480) {
+  // mobile
   cols = 20;
   rows = 36;
-  cellSize = '12px';
-} else if (window.innerWidth <= 768) { // tablet
+  cellSize = "12px";
+} else if (window.innerWidth <= 768) {
+  // tablet
   cols = 32;
   rows = 48;
-  cellSize = '16px';
-} else { // desktop
+  cellSize = "16px";
+} else {
+  // desktop
   cols = 48;
   rows = 27;
-  cellSize = '20px';
+  cellSize = "20px";
 }
 
 // sets the variables in the style.css
-const gridElement = document.getElementById('grid');
+const gridElement = document.getElementById("grid");
 
-gridElement.style.setProperty('--rows', rows);
-gridElement.style.setProperty('--cols', cols);
-gridElement.style.setProperty('--cell-size', cellSize);
+gridElement.style.setProperty("--rows", rows);
+gridElement.style.setProperty("--cols", cols);
+gridElement.style.setProperty("--cell-size", cellSize);
 
 const totalCells = cols * rows;
 
@@ -72,6 +75,7 @@ document.getElementById("faster").addEventListener("click", () => {
   speed = Math.max(0.05, speed - 0.1); // faster, minimum 0.05s
 });
 
+//TODO: make grid customizable
 // document.getElementById("smaller").addEventListener("click", () => {
 //   // optionally shrink grid or reduce cell size
 // });
@@ -79,6 +83,13 @@ document.getElementById("faster").addEventListener("click", () => {
 // document.getElementById("larger").addEventListener("click", () => {
 //   // optionally enlarge grid or increase cell size
 // });
+
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", resetGame);
+
+function resetGame() {
+  window.location.reload();
+}
 
 // the grid we show
 let gameGrid = new Grid(rows, cols);
